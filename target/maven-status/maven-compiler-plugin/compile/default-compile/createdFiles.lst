@@ -1,0 +1,8 @@
+org\pcremades\display\UserInterfaceImpl.class
+org\pcremades\display\UserInterface.class
+org\pcremades\Game.class
+org\pcremades\App.class
+org\pcremades\enums\Choice.class
+org\pcremades\players\Bot.class
+org\pcremades\players\Human.class
+org\pcremades\players\Player.class
