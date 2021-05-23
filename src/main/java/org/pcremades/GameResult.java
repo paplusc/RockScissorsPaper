@@ -15,37 +15,47 @@ public class GameResult {
     this.roundResults = roundResults;
   }
 
+  public List<RoundResult> roundResults() {
+    return roundResults;
+  }
+
   public String result() {
 
-    // Remove rounds with tie result
-    List<String> resultReport = roundResults.stream().map(RoundResult::winner)
+    List<String> winners = buildListOfWinners();
+
+    if (winners.isEmpty()) {
+      return Message.FINAL_TIE;
+    }
+
+    Map<String, Long> resultReport = winners.stream().collect(Collectors.groupingBy(
+                                     Function.identity(), Collectors.counting()));
+
+
+    // Divide the two players and check which one has more wins.
+    Iterator<Map.Entry<String, Long>> iterator = resultReport.entrySet().iterator();
+    Map.Entry<String, Long> firstPlayer = iterator.next();
+    if(!iterator.hasNext()) {
+      return firstPlayer.getKey() + Message.FINAL_WINNER;
+    }
+    Map.Entry<String, Long> secondPlayer = iterator.next();
+
+    if (firstPlayer.getValue() > secondPlayer.getValue()) {
+      System.out.println(Message.LINE);
+      return firstPlayer.getKey() + Message.FINAL_WINNER;
+    }
+    else if (firstPlayer.getValue() < secondPlayer.getValue()) {
+      System.out.println(Message.LINE);
+      return secondPlayer.getKey() + Message.FINAL_WINNER;
+    } else {
+      return Message.FINAL_TIE;
+    }
+  }
+
+  private List<String> buildListOfWinners() {
+    return roundResults.stream().map(RoundResult::winner)
                .filter(Optional::isPresent)
                .map(Optional::get)
                .map(Player::name)
                .collect(Collectors.toList());
-
-    if (resultReport.isEmpty()) {
-      return "The final result is TIE!";
-    }
-
-    // Group and Count the wins of each player
-    Map<String, Long> result = resultReport.stream().collect(Collectors.groupingBy(
-                                     Function.identity(), Collectors.counting()));
-
-
-    Iterator<Map.Entry<String, Long>> iterator = result.entrySet().iterator();
-    Map.Entry<String, Long> firstPlayer = iterator.next();
-    Map.Entry<String, Long> secondPlayer = iterator.next();
-
-    if (firstPlayer.getValue() > secondPlayer.getValue()) {
-      System.out.println("--------------------------------");
-      return firstPlayer.getKey() + " is the final winner!";
-    }
-    else if (firstPlayer.getValue() < secondPlayer.getValue()) {
-      System.out.println("--------------------------------");
-      return secondPlayer.getKey() + " is the final winner!";
-    } else {
-      return "The final result is TIE!";
-    }
   }
 }

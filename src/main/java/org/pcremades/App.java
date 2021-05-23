@@ -3,27 +3,29 @@ package org.pcremades;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * Rock-Scissors-Paper Game to play in the console.
  *
  */
 public class App 
 {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final String BOT_NAME = "Bot_999999";
 
-    public static void main( String[] args )
-    {
-        System.out.println("--------------------------------------");
-        System.out.println("   ROCK-SCISSORS-PAPER, Let's play!   ");
-        System.out.println("--------------------------------------");
-        System.out.print("Welcome player, what is your name? ");
-        String inputName = scanner.nextLine();
+    public static void main( String[] args ) {
 
-        Player playerOne = new Human(inputName);
-        Player playerTwo = new Bot("Bot45122");
+        System.out.println(Message.LINE);
+        System.out.println(Message.TITTLE);
+        System.out.println(Message.LINE);
+        System.out.print(Message.GREETINGS);
 
-        RockScissorsPaperGame game = new RockScissorsPaperGame(playerOne, playerTwo, 3);
-        GameResult gameResult = game.play();
+        final Scanner scanner = new Scanner(System.in);
+        final String inputName = scanner.nextLine();
 
-        System.out.println(gameResult.result());
+        final Player playerOne = new Human(inputName);
+        final Player playerTwo = new Bot(BOT_NAME);
+
+        final RockScissorsPaperGame game = new RockScissorsPaperGame(playerOne, playerTwo, 3);
+        final GameResult gameResult = game.play();
+
+        System.out.println("***" + gameResult.result() + "***");
     }
 }

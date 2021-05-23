@@ -19,7 +19,15 @@ public class Human implements Player {
 
   @Override
   public Choice choice() {
-    System.out.print("Pick wisely -> ROCK-SCISSORS-PAPER: ");
-    return Choice.valueOf(scanner.nextLine().toUpperCase());
+    try {
+      System.out.print(Message.PICK_ONE);
+      return Choice.valueOf(scanner.nextLine().toUpperCase());
+
+    } catch (IllegalArgumentException e) {
+      System.out.println(Message.WRONG_INPUT);
+      System.out.println(Message.TRY_AGAIN);
+      System.out.println(Message.LINE);
+      return choice();
+    }
   }
 }
