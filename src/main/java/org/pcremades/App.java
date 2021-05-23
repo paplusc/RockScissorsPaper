@@ -2,13 +2,6 @@ package org.pcremades;
 
 import java.util.Scanner;
 
-import org.pcremades.display.UserInterface;
-import org.pcremades.display.UserInterfaceImpl;
-import org.pcremades.enums.Choice;
-import org.pcremades.players.Bot;
-import org.pcremades.players.Human;
-import org.pcremades.players.Player;
-
 /**
  * Hello world!
  *
@@ -16,29 +9,21 @@ import org.pcremades.players.Player;
 public class App 
 {
     private static Scanner scanner = new Scanner(System.in);
-    private static UserInterface display = new UserInterfaceImpl();
 
     public static void main( String[] args )
     {
-        display.greetings();
+        System.out.println("--------------------------------------");
+        System.out.println("   ROCK-SCISSORS-PAPER, Let's play!   ");
+        System.out.println("--------------------------------------");
+        System.out.print("Welcome player, what is your name? ");
         String inputName = scanner.nextLine();
 
-        display.askChoice();
-        String inputChoice = scanner.nextLine();
+        Player playerOne = new Human(inputName);
+        Player playerTwo = new Bot("Bot45122");
 
-        Player playerOne = new Human(inputName, Choice.valueOf(inputChoice.toUpperCase()));
-        Player bot = new Bot();
+        RockScissorsPaperGame game = new RockScissorsPaperGame(playerOne, playerTwo, 3);
+        GameResult gameResult = game.play();
 
-        display.playerChoice(playerOne);
-        display.playerChoice(bot);
-
-        Game game = new Game(playerOne, bot);
-        Player winner = game.play();
-
-        if(winner != null) {
-            display.gameResult(winner);
-        } else {
-            System.out.println("It's a tie!");
-        }
+        System.out.println(gameResult.result());
     }
 }
