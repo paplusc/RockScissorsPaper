@@ -11,6 +11,7 @@ import org.pcremades.mock.MockPlayerRock;
 public class GameResultTest {
 
   private final Player playerRock = new MockPlayerRock();
+
   private final Player playerPaper = new MockPlayerPaper();
 
   @Nested

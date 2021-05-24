@@ -2,6 +2,9 @@ package org.pcremades;
 
 import java.util.Optional;
 
+/**
+ * The Round result.
+ */
 public class RoundResult {
 
   private final Player winner;

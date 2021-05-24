@@ -2,14 +2,19 @@ package org.pcremades;
 
 import java.util.Scanner;
 
+/**
+ * The Human.
+ * A new input will be asked to the user in the console every time we call the choice method.
+ */
 public class Human implements Player {
 
   private final String name;
+
   private final Scanner scanner;
 
-  public Human(String name) {
+  public Human(String name, Scanner scanner) {
     this.name = name;
-    this.scanner = new Scanner(System.in);
+    this.scanner = scanner;
   }
 
   @Override

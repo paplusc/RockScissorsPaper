@@ -1,5 +1,8 @@
 package org.pcremades;
 
+/**
+ * The Messages that are displayed in the game
+ */
 public class Message {
 
   private Message() {}

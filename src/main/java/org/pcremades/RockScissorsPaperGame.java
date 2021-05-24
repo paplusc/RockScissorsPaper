@@ -3,6 +3,11 @@ package org.pcremades;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The RockScissorsPaper game implementation.
+ * Is the main logic of the game.
+ * Two players will play 'n' rounds and the result will be save in the roundResults list.
+ */
 public class RockScissorsPaperGame implements Game {
 
   private final Player playerOne;
@@ -37,7 +42,6 @@ public class RockScissorsPaperGame implements Game {
       printPlayerResult(playerTwo.name(), playerTwoChoice);
       printWinner(playerOne.name());
       System.out.println(Message.LINE);
-
       roundResults.add(RoundResult.wins(playerOne));
 
     } else if ((playerOneChoice == Choice.ROCK && playerTwoChoice == Choice.PAPER) ||
@@ -48,7 +52,6 @@ public class RockScissorsPaperGame implements Game {
       printPlayerResult(playerTwo.name(), playerTwoChoice);
       printWinner(playerTwo.name());
       System.out.println(Message.LINE);
-
       roundResults.add(RoundResult.wins(playerTwo));
 
     } else {

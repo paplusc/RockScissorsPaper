@@ -7,6 +7,10 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * The Game Result.
+ * Logic where the game will determinate who has more wins in a list of played rounds.
+ */
 public class GameResult {
 
   private final List<RoundResult> roundResults;
@@ -40,11 +44,9 @@ public class GameResult {
     Map.Entry<String, Long> secondPlayer = iterator.next();
 
     if (firstPlayer.getValue() > secondPlayer.getValue()) {
-      System.out.println(Message.LINE);
       return firstPlayer.getKey() + Message.FINAL_WINNER;
     }
     else if (firstPlayer.getValue() < secondPlayer.getValue()) {
-      System.out.println(Message.LINE);
       return secondPlayer.getKey() + Message.FINAL_WINNER;
     } else {
       return Message.FINAL_TIE;
